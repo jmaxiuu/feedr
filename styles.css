@@ -1,0 +1,261 @@
+/* ---------- fonts ----------
+   Self-hosted so the installed app still looks right offline.
+   Bricolage Grotesque (variable 400–800) — the sign out front: logo, buttons, video titles.
+   Courier Prime — the kitchen printer: tickets, labels, every bit of small caps type.
+   Both SIL Open Font License 1.1. */
+@font-face{
+  font-family:"Bricolage Grotesque";
+  font-style:normal;font-weight:400 800;font-display:swap;
+  src:url(fonts/bricolage-grotesque-latin.woff2) format("woff2");
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face{
+  font-family:"Bricolage Grotesque";
+  font-style:normal;font-weight:400 800;font-display:swap;
+  src:url(fonts/bricolage-grotesque-latin-ext.woff2) format("woff2");
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+}
+@font-face{
+  font-family:"Courier Prime";
+  font-style:normal;font-weight:400;font-display:swap;
+  src:url(fonts/courier-prime-400-latin.woff2) format("woff2");
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face{
+  font-family:"Courier Prime";
+  font-style:normal;font-weight:400;font-display:swap;
+  src:url(fonts/courier-prime-400-latin-ext.woff2) format("woff2");
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+}
+@font-face{
+  font-family:"Courier Prime";
+  font-style:normal;font-weight:700;font-display:swap;
+  src:url(fonts/courier-prime-700-latin.woff2) format("woff2");
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
+@font-face{
+  font-family:"Courier Prime";
+  font-style:normal;font-weight:700;font-display:swap;
+  src:url(fonts/courier-prime-700-latin-ext.woff2) format("woff2");
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;
+}
+
+:root{
+  /* ---- palette: gold ----
+     Every colour the app uses lives here. Swapping these values repaints the
+     whole thing; nothing below this block hardcodes a colour. */
+  --void:#0a0906;        /* behind the phone on desktop */
+  --bg:#131008;          /* dim diner at night */
+  --glow-top:#241d0e;    /* the wash behind the header */
+  --frame:#2c2717;
+  --surface:#1e1a10;
+  --surface-2:#26200f;
+  --line:#3a3218;
+
+  --accent:#ffb224;      /* neon sign: logo, glows, cooking dots */
+  --accent-rgb:255,178,36;
+  --accent-soft:#ffcf6b; /* focus rings */
+  --accent-fill:#ffb224; /* selected chips */
+  --on-accent:#241a02;   /* type on that fill — amber is too light for white */
+  --disc-hi:#ffd98a;     /* the Feed me disc, lit from upper-left */
+  --disc-mid:#ffb224;
+  --disc-lo:#d98c0c;
+  --sub-opacity:.75;     /* 'tap once · eat' */
+
+  --cta:#e4572e;         /* Open in YouTube keeps its own red, distinct from the accent */
+  --cta-rgb:228,87,46;
+  --on-cta:#fff;
+
+  --ink-dim:#a89a78;
+  --ink:#f2ead6;
+  --footer-ink:#5c543a;
+  --paper:#faf5e9;       /* order ticket */
+  --paper-ink:#221c10;
+  --paper-dim:#77704f;
+  --paper-rule:#b9b092;
+
+  --sans:-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --display:"Bricolage Grotesque", var(--sans);
+  --mono:"Courier Prime", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --safe-t:env(safe-area-inset-top, 0px);
+  --safe-b:env(safe-area-inset-bottom, 0px);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{
+  background:var(--void);
+  font-family:var(--sans);
+  color:var(--ink);
+  display:flex;justify-content:center;align-items:center;
+  min-height:100vh;
+  min-height:100dvh;             /* survives the mobile URL bar */
+  overscroll-behavior:none;      /* no rubber-band / pull-to-refresh */
+}
+/* phone frame on desktop, full-bleed on mobile */
+.phone{
+  width:100%;max-width:400px;
+  height:100vh;height:100dvh;
+  background:radial-gradient(120% 90% at 50% -10%, var(--glow-top) 0%, var(--bg) 55%);
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;
+}
+@media(min-width:440px){
+  .phone{max-height:820px;border-radius:36px;border:1px solid var(--frame);box-shadow:0 30px 80px rgba(0,0,0,.7)}
+}
+
+/* ---------- header ---------- */
+header{
+  padding:calc(26px + var(--safe-t)) 24px 8px;
+  display:flex;align-items:baseline;justify-content:space-between;
+}
+.logo{
+  font-family:var(--display);font-weight:800;font-size:26px;letter-spacing:-.03em;
+  color:var(--accent);
+  text-shadow:0 0 18px rgba(var(--accent-rgb),.45), 0 0 44px rgba(var(--accent-rgb),.18);
+}
+.logo em{font-style:normal;color:var(--ink)}
+.tag{font-family:var(--mono);font-size:10px;color:var(--ink-dim);letter-spacing:.08em;text-transform:uppercase}
+
+/* ---------- controls ---------- */
+.controls{padding:18px 24px 0;transition:opacity .2s ease}
+.label{
+  font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--ink-dim);margin:14px 0 8px;
+}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{
+  border:1px solid var(--line);background:var(--surface);
+  color:var(--ink-dim);
+  border-radius:999px;padding:9px 14px;font-size:13px;font-weight:600;
+  cursor:pointer;transition:all .18s ease;font-family:var(--display);
+}
+.chip small{display:block;font-family:var(--mono);font-weight:400;font-size:9px;letter-spacing:.06em;color:inherit;opacity:.7}
+.chip.on{
+  background:var(--accent-fill);border-color:var(--accent-fill);color:var(--on-accent);
+  box-shadow:0 0 16px rgba(var(--accent-rgb),.35);
+}
+.chip:focus-visible{outline:2px solid var(--accent-soft);outline-offset:2px}
+
+/* ---------- big button ---------- */
+.stage{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 24px;position:relative}
+.feed-btn{
+  width:190px;height:190px;border-radius:50%;
+  border:none;cursor:pointer;position:relative;
+  background:
+    radial-gradient(circle at 32% 28%, var(--disc-hi) 0%, var(--disc-mid) 42%, var(--disc-lo) 100%);
+  color:var(--on-accent);
+  font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:-.01em;
+  box-shadow:0 0 0 10px rgba(var(--accent-rgb),.07), 0 0 40px rgba(var(--accent-rgb),.32), 0 14px 30px rgba(0,0,0,.5);
+  transition:transform .12s ease, box-shadow .2s ease;
+}
+.feed-btn:active{transform:scale(.94)}
+/* --sub-opacity is palette-specific: dark type on a light fill can take less than white can */
+.feed-btn span{display:block;font-family:var(--mono);font-weight:400;font-size:10px;letter-spacing:.12em;margin-top:6px;opacity:var(--sub-opacity)}
+.feed-btn:focus-visible{outline:3px solid var(--paper);outline-offset:4px}
+.hint{margin-top:22px;font-family:var(--mono);font-size:10px;color:var(--ink-dim);letter-spacing:.1em;text-transform:uppercase}
+
+/* cooking state */
+.cooking{display:none;text-align:center}
+.cooking .dots{font-size:34px;letter-spacing:6px;color:var(--accent);animation:blink 1s steps(3) infinite}
+.cooking p{font-family:var(--mono);font-size:11px;color:var(--ink-dim);margin-top:10px;letter-spacing:.1em;text-transform:uppercase}
+@keyframes blink{50%{opacity:.25}}
+
+/* fault state — catalog failed to load */
+.fault{display:none;text-align:center;max-width:280px}
+.fault .dots{font-size:30px;color:var(--accent)}
+.fault p{font-family:var(--mono);font-size:11px;color:var(--ink-dim);margin:10px 0 18px;letter-spacing:.06em;line-height:1.6}
+.fault .btn{width:100%}
+
+/* ---------- ticket ---------- */
+.ticket-wrap{
+  position:absolute;inset:0;display:none;
+  flex-direction:column;align-items:center;justify-content:center;
+  justify-content:safe center;   /* long chooser lists scroll instead of clipping */
+  overflow-y:auto;
+  padding:20px 26px;
+}
+.ticket{
+  width:100%;max-width:320px;background:var(--paper);color:var(--paper-ink);
+  font-family:var(--mono);
+  padding:20px 20px 26px;
+  box-shadow:0 18px 40px rgba(0,0,0,.55);
+  /* torn bottom edge */
+  clip-path:polygon(0 0,100% 0,100% calc(100% - 9px),96% 100%,92% calc(100% - 9px),88% 100%,84% calc(100% - 9px),80% 100%,76% calc(100% - 9px),72% 100%,68% calc(100% - 9px),64% 100%,60% calc(100% - 9px),56% 100%,52% calc(100% - 9px),48% 100%,44% calc(100% - 9px),40% 100%,36% calc(100% - 9px),32% 100%,28% calc(100% - 9px),24% 100%,20% calc(100% - 9px),16% 100%,12% calc(100% - 9px),8% 100%,4% calc(100% - 9px),0 100%);
+  transform:translateY(-24px);opacity:0;
+}
+.ticket.printed{animation:printOut .55s cubic-bezier(.2,.9,.3,1.15) forwards}
+@keyframes printOut{
+  from{transform:translateY(-46px) scaleY(.6);opacity:0}
+  to{transform:translateY(0) scaleY(1);opacity:1}
+}
+@media (prefers-reduced-motion: reduce){
+  .ticket.printed{animation:none;transform:none;opacity:1}
+  .cooking .dots{animation:none}
+}
+.t-head{display:flex;justify-content:space-between;font-size:9px;letter-spacing:.08em;color:var(--paper-dim);text-transform:uppercase}
+.t-rule{border-top:1px dashed var(--paper-rule);margin:10px 0}
+.t-eyebrow{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--paper-dim);text-align:center}
+.t-title{
+  font-family:var(--display);font-weight:800;font-size:19px;letter-spacing:-.02em;line-height:1.25;
+  text-align:center;margin:8px 0 4px;
+}
+.t-meta{text-align:center;font-size:11px;color:var(--paper-dim)}
+.t-fit{
+  margin:12px auto 0;width:fit-content;
+  font-size:10px;letter-spacing:.08em;text-transform:uppercase;
+  background:var(--paper-ink);color:var(--paper);
+  padding:4px 10px;border-radius:3px;
+}
+.t-actions{width:100%;max-width:320px;margin-top:18px;display:flex;flex-direction:column;gap:10px}
+.btn{
+  border:none;border-radius:12px;padding:15px;font-size:15px;font-weight:700;cursor:pointer;
+  font-family:var(--display);transition:transform .12s ease;
+}
+.btn:active{transform:scale(.97)}
+.btn:focus-visible{outline:2px solid var(--accent-soft);outline-offset:2px}
+.btn-yt{
+  background:var(--cta);color:var(--on-cta);
+  box-shadow:0 8px 22px rgba(var(--cta-rgb),.35);
+}
+.btn-row{display:flex;gap:10px}
+.btn-ghost{
+  flex:1;background:transparent;border:1px solid var(--line);color:var(--ink-dim);font-size:13px;font-weight:600;padding:12px;
+}
+.btn-ghost:hover{color:var(--ink);border-color:var(--ink-dim)}
+
+/* ---------- forced choice ---------- */
+.chooser{display:none;width:100%;max-width:320px;flex-direction:column;gap:10px}
+.chooser-head{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim);text-align:center;margin-bottom:4px}
+.opt{
+  background:var(--paper);color:var(--paper-ink);border:none;border-radius:8px;
+  padding:14px 16px;text-align:left;cursor:pointer;font-family:var(--sans);
+  display:flex;justify-content:space-between;align-items:center;gap:10px;
+  transition:transform .12s ease, box-shadow .15s ease;
+  box-shadow:0 6px 16px rgba(0,0,0,.35);
+}
+.opt:active{transform:scale(.98)}
+.opt:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.opt b{font-family:var(--display);font-weight:800;font-size:14px;letter-spacing:-.01em;display:block}
+.opt small{font-family:var(--mono);font-size:10px;color:var(--paper-dim)}
+.opt .go{font-size:18px;color:var(--cta);flex-shrink:0}
+
+footer{
+  padding:14px 24px calc(26px + var(--safe-b));text-align:center;
+  font-family:var(--mono);font-size:9px;color:var(--footer-ink);letter-spacing:.1em;text-transform:uppercase;
+}
+
+/* narrow phones: Bricolage runs wider than the system face — keep the moods to two rows */
+@media (max-width:360px){
+  .chips{gap:6px}
+  .chip{padding:8px 12px;font-size:12px}
+}
+
+/* short phones: give the stage room by tightening the chrome */
+@media (max-height:700px){
+  header{padding-top:calc(16px + var(--safe-t))}
+  .controls{padding-top:8px}
+  .label{margin:10px 0 6px}
+  .feed-btn{width:160px;height:160px;font-size:17px}
+  .hint{margin-top:16px}
+  footer{padding:10px 24px calc(16px + var(--safe-b))}
+}

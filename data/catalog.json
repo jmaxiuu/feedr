@@ -1,0 +1,35 @@
+{
+  "$comment": "Feedr catalog. Edit this file to change the app — no code changes needed. Each video's `mood` must match a mood `id` below. `min` is the runtime in minutes; the picker prefers videos closest to the chosen meal length.",
+  "lengths": [
+    { "minutes": 10, "label": "Snack", "sub": "~10 min" },
+    { "minutes": 20, "label": "Lunch", "sub": "~20 min", "default": true },
+    { "minutes": 35, "label": "Dinner", "sub": "30+ min" }
+  ],
+  "moods": [
+    { "id": "comfort", "label": "Comfort", "default": true },
+    { "id": "learn", "label": "Learn something" },
+    { "id": "mystery", "label": "Internet mystery" },
+    { "id": "funny", "label": "Funny" },
+    { "id": "podcast", "label": "Podcast" }
+  ],
+  "videos": [
+    { "id": "fnl-jOnoYgg", "title": "Lobscouse — a Sailor's Stew", "channel": "Townsends", "min": 14, "mood": "comfort" },
+    { "id": "x7HfQIZWu3A", "title": "made with love", "channel": "emma chamberlain", "min": 20, "mood": "comfort" },
+    { "id": "1zRsZ4BRet8", "title": "18th Century Cooking Marathon", "channel": "Townsends", "min": 70, "mood": "comfort" },
+
+    { "id": "h6fcK_fRYaI", "title": "The Egg — A Short Story", "channel": "Kurzgesagt", "min": 8, "mood": "learn" },
+    { "id": "uxPdPpi5W4o", "title": "Why Are 96,000,000 Black Balls on This Reservoir?", "channel": "Veritasium", "min": 12, "mood": "learn" },
+    { "id": "YMDJA4UvXLA", "title": "These Pools Help Support Half The People On Earth", "channel": "Veritasium", "min": 19, "mood": "learn" },
+
+    { "id": "I2O7blSSzpI", "title": "Cicada 3301: An Internet Mystery", "channel": "LEMMiNO", "min": 21, "mood": "mystery" },
+    { "id": "oHSehKtDyoI", "title": "The Strange Disappearance of D.B. Cooper", "channel": "BuzzFeed Unsolved", "min": 24, "mood": "mystery" },
+
+    { "id": "Dd7FixvoKBw", "title": "Substitute Teacher", "channel": "Key & Peele", "min": 3, "mood": "funny" },
+    { "id": "WLAq3JVJ6Ho", "title": "Substitute Teacher Pt. 2", "channel": "Key & Peele", "min": 4, "mood": "funny" },
+    { "id": "RrFTC23tCu4", "title": "25 Mins of the Best Sketches", "channel": "Key & Peele", "min": 25, "mood": "funny" },
+    { "id": "nWtWY6wNKBE", "title": "4 Hours of Iconic Sketches", "channel": "Key & Peele", "min": 240, "mood": "funny" },
+
+    { "id": "Y6KGt0gs6Cs", "title": "vanity — anything goes", "channel": "emma chamberlain", "min": 30, "mood": "podcast" },
+    { "id": "QMzxNfX-uAg", "title": "Matthew McConaughey", "channel": "The Diary of a CEO", "min": 135, "mood": "podcast" }
+  ]
+}
