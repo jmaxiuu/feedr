@@ -10,7 +10,7 @@
     { "id": "learn", "label": "Learn something" },
     { "id": "mystery", "label": "Internet mystery" },
     { "id": "funny", "label": "Funny" },
-    { "id": "podcast", "label": "Podcast" }
+    { "id": "gameshow", "label": "Game show" }
   ],
   "videos": [
     { "id": "fnl-jOnoYgg", "title": "Lobscouse — a Sailor's Stew", "channel": "Townsends", "min": 14, "mood": "comfort" },
@@ -29,7 +29,13 @@
     { "id": "RrFTC23tCu4", "title": "25 Mins of the Best Sketches", "channel": "Key & Peele", "min": 25, "mood": "funny" },
     { "id": "nWtWY6wNKBE", "title": "4 Hours of Iconic Sketches", "channel": "Key & Peele", "min": 240, "mood": "funny" },
 
-    { "id": "Y6KGt0gs6Cs", "title": "vanity — anything goes", "channel": "emma chamberlain", "min": 30, "mood": "podcast" },
-    { "id": "QMzxNfX-uAg", "title": "Matthew McConaughey", "channel": "The Diary of a CEO", "min": 135, "mood": "podcast" }
+    { "id": "wdAva6xBjOQ", "title": "Ranking Strangers from Tallest to Shortest", "channel": "Beta Squad", "min": 19, "mood": "gameshow" },
+    { "id": "lqAFHewbG9Q", "title": "Blind Dating Girls Based On Their Outfits Ft Deji", "channel": "Beta Squad", "min": 20, "mood": "gameshow" },
+    { "id": "8NPSL9rCOss", "title": "We Challenged Bounty Hunters To Hide And Seek", "channel": "Beta Squad", "min": 23, "mood": "gameshow" },
+    { "id": "sGNfA2iRNFw", "title": "Fit Through The Hole: Beta Squad vs YouTube Allstars", "channel": "Beta Squad", "min": 36, "mood": "gameshow" },
+    { "id": "wSnq36pGibc", "title": "Match The Height To The Person", "channel": "Kevin Langue", "min": 25, "mood": "gameshow" },
+    { "id": "juXWXv6U7sA", "title": "5 Teenagers vs 1 Secret 30yr Old", "channel": "Kevin Langue", "min": 29, "mood": "gameshow" },
+    { "id": "k89kCejMM-s", "title": "5 Humans vs 1 Secret Animal", "channel": "Kevin Langue", "min": 29, "mood": "gameshow" },
+    { "id": "mXBDGCHC1pI", "title": "$1 vs $1 Million Magician", "channel": "Kevin Langue", "min": 48, "mood": "gameshow" }
   ]
 }
