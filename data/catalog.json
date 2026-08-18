@@ -1,29 +1,48 @@
 {
   "$comment": "Feedr catalog. Edit this file to change the app — no code changes needed. Each video's `mood` must match a mood `id` below. `min` is the runtime in minutes; the picker prefers videos closest to the chosen meal length.",
   "lengths": [
-    { "minutes": 10, "label": "Snack", "sub": "~10 min" },
-    { "minutes": 20, "label": "Lunch", "sub": "~20 min", "default": true },
-    { "minutes": 35, "label": "Dinner", "sub": "30+ min" }
+    {"minutes": 10, "label": "Snack", "sub": "~10 min"},
+    {"minutes": 20, "label": "Lunch", "sub": "~20 min", "default": true},
+    {"minutes": 35, "label": "Dinner", "sub": "30+ min"}
   ],
   "moods": [
-    { "id": "comfort", "label": "Comfort", "default": true },
-    { "id": "learn", "label": "Learn something" },
-    { "id": "mystery", "label": "Internet mystery" },
-    { "id": "funny", "label": "Funny" },
-    { "id": "gameshow", "label": "Game show" }
+    {"id": "comfort", "label": "Comfort", "default": true},
+    {"id": "learn", "label": "Learn something"},
+    {"id": "mystery", "label": "Internet mystery"},
+    {"id": "funny", "label": "Funny"},
+    {"id": "gameshow", "label": "Game show"}
   ],
   "videos": [
+    { "id": "d1mvOwTmeBY", "title": "My mom came to new york ", "channel": "Cotton ryan", "min": 12, "mood": "comfort" },
+    { "id": "1GWbOyZpUF0", "title": "moving into our nyc apartment", "channel": "Cotton ryan", "min": 16, "mood": "comfort" },
+    { "id": "DhocsXSqJko", "title": "i'm pulling myself out of a creative drought | nyc vlog", "channel": "Cotton ryan", "min": 24, "mood": "comfort" },
+    { "id": "HgH9ijc_0Z8", "title": "getting out of a slump", "channel": "Dustin Vuong", "min": 11, "mood": "comfort" },
+    { "id": "B6C5QPCetNs", "title": "thrifting, coffee, and talking too much", "channel": "Dustin Vuong", "min": 13, "mood": "comfort" },
+    { "id": "52pehz2S3sg", "title": "hard launch", "channel": "Dustin Vuong", "min": 15, "mood": "comfort" },
     { "id": "fnl-jOnoYgg", "title": "Lobscouse — a Sailor's Stew", "channel": "Townsends", "min": 14, "mood": "comfort" },
-    { "id": "x7HfQIZWu3A", "title": "made with love", "channel": "emma chamberlain", "min": 20, "mood": "comfort" },
     { "id": "1zRsZ4BRet8", "title": "18th Century Cooking Marathon", "channel": "Townsends", "min": 70, "mood": "comfort" },
+    { "id": "x7HfQIZWu3A", "title": "made with love", "channel": "emma chamberlain", "min": 20, "mood": "comfort" },
 
+    { "id": "o3FQcd91MIs", "title": "Why The Dumbest Investors Win (it's not why you think)", "channel": "Casual Finance", "min": 5, "mood": "learn" },
+    { "id": "kwMHrTFCWUE", "title": "Every Type of Investor Explained in 6 Minutes", "channel": "Casual Finance", "min": 6, "mood": "learn" },
+    { "id": "965yZYhY_f4", "title": "The $12 Billion Trading Scam That Only Works If You Fail", "channel": "Casual Finance", "min": 9, "mood": "learn" },
+    { "id": "1BvEBMnydko", "title": "The Great Beast & The Green Fairy:  Aleister Crowley on Absinthe & New Orleans by@AtunSheiFilms", "channel": "ESOTERICA", "min": 24, "mood": "learn" },
     { "id": "h6fcK_fRYaI", "title": "The Egg — A Short Story", "channel": "Kurzgesagt", "min": 8, "mood": "learn" },
+    { "id": "4KUVhACw3Dc", "title": "The History of MKUltra", "channel": "Philion", "min": 18, "mood": "learn" },
     { "id": "uxPdPpi5W4o", "title": "Why Are 96,000,000 Black Balls on This Reservoir?", "channel": "Veritasium", "min": 12, "mood": "learn" },
     { "id": "YMDJA4UvXLA", "title": "These Pools Help Support Half The People On Earth", "channel": "Veritasium", "min": 19, "mood": "learn" },
+    { "id": "kYbVPEjP5zc", "title": "Aleister Crowley: The Man Who Spoke To Demons", "channel": "hochelaga", "min": 14, "mood": "learn" },
 
-    { "id": "I2O7blSSzpI", "title": "Cicada 3301: An Internet Mystery", "channel": "LEMMiNO", "min": 21, "mood": "mystery" },
     { "id": "oHSehKtDyoI", "title": "The Strange Disappearance of D.B. Cooper", "channel": "BuzzFeed Unsolved", "min": 24, "mood": "mystery" },
+    { "id": "I2O7blSSzpI", "title": "Cicada 3301: An Internet Mystery", "channel": "LEMMiNO", "min": 21, "mood": "mystery" },
 
+    { "id": "ZRxauMYSaPw", "title": "Can we get a stranger to cook us dinner?", "channel": "Bunch of Friends", "min": 14, "mood": "funny" },
+    { "id": "1sY4UM2CmD4", "title": "Drinking Beer with a Wizard", "channel": "Bunch of Friends", "min": 16, "mood": "funny" },
+    { "id": "kN9t-AHEBf8", "title": "You laugh you lose with a 70 year old man", "channel": "Bunch of Friends", "min": 18, "mood": "funny" },
+    { "id": "f2rgzsO-AMM", "title": "Nathan For You - Interview With a Seven-Year-Old", "channel": "Comedy Central", "min": 2, "mood": "funny" },
+    { "id": "jf9I04Oa-hU", "title": "Nathan For You - Fixing Computer Repair", "channel": "Comedy Central", "min": 7, "mood": "funny" },
+    { "id": "NO8V72pDw1o", "title": "Nathan For You - Frozen Yogurt", "channel": "Comedy Central", "min": 8, "mood": "funny" },
+    { "id": "n7BlydBMAVU", "title": "Nathan For You - The Ghost Realtor", "channel": "Comedy Central", "min": 11, "mood": "funny" },
     { "id": "Dd7FixvoKBw", "title": "Substitute Teacher", "channel": "Key & Peele", "min": 3, "mood": "funny" },
     { "id": "WLAq3JVJ6Ho", "title": "Substitute Teacher Pt. 2", "channel": "Key & Peele", "min": 4, "mood": "funny" },
     { "id": "RrFTC23tCu4", "title": "25 Mins of the Best Sketches", "channel": "Key & Peele", "min": 25, "mood": "funny" },
