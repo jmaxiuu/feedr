@@ -96,6 +96,15 @@ than gambling across a huge gap.
 That multiplier is `OVERRUN` at the top of [`js/app.js`](js/app.js) — raise it if you want
 long videos offered more freely, lower it to be stricter.
 
+Within a round, Feedr also avoids serving two videos from the same channel, so three
+rerolls give you three different creators. It's a preference rather than a rule: if the mood
+runs out of fresh channels it will repeat one rather than serve nothing, and runtime fit
+always wins over channel variety — being handed the wrong length is worse than being handed
+the same channel twice.
+
+**A mood needs at least 3 distinct channels** at a given length to guarantee a repeat-free
+round of 3. Fewer than that and the third pick reuses a channel.
+
 A mood needs a decent spread of runtimes to feel good. If every video in a mood is an hour
 plus, a "Snack" request there has nothing short to offer and will serve a long one.
 

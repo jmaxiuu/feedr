@@ -62,11 +62,18 @@ function pick(){
   const fits = pool.filter(v => v.min <= mealLen * OVERRUN);
   const bench = fits.length ? fits : pool;
 
-  bench.sort((a,b) => Math.abs(a.min - mealLen) - Math.abs(b.min - mealLen));
+  // Three picks from the same channel is a boring round, so skip channels already served.
+  // It's a preference, not a rule — a thin mood would otherwise run out of things to offer,
+  // and being handed the wrong runtime is worse than being handed the same channel twice.
+  const servedChannels = new Set(round.map(v => v.channel));
+  const fresh = bench.filter(v => !servedChannels.has(v.channel));
+  const shortlist = fresh.length ? fresh : bench;
+
+  shortlist.sort((a,b) => Math.abs(a.min - mealLen) - Math.abs(b.min - mealLen));
 
   // Flipping a coin between the two closest keeps repeat rounds from being identical — but
   // only when both actually fit. With nothing in range, take the closest and nothing else.
-  const top = fits.length ? bench.slice(0,2) : bench.slice(0,1);
+  const top = fits.length ? shortlist.slice(0,2) : shortlist.slice(0,1);
   return top[Math.floor(Math.random() * top.length)];
 }
 
