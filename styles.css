@@ -41,38 +41,38 @@
 }
 
 :root{
-  /* ---- palette: gold ----
+  /* ---- palette: red ----
      Every colour the app uses lives here. Swapping these values repaints the
      whole thing; nothing below this block hardcodes a colour. */
-  --void:#0a0906;        /* behind the phone on desktop */
-  --bg:#131008;          /* dim diner at night */
-  --glow-top:#241d0e;    /* the wash behind the header */
-  --frame:#2c2717;
-  --surface:#1e1a10;
-  --surface-2:#26200f;
-  --line:#3a3218;
+  --void:#0a0707;        /* behind the phone on desktop */
+  --bg:#100b0b;          /* dim diner at night */
+  --glow-top:#2b1414;    /* the wash behind the header */
+  --frame:#2e1e1e;
+  --surface:#1b1313;
+  --surface-2:#241818;
+  --line:#3a2222;
 
-  --accent:#ffb224;      /* neon sign: logo, glows, cooking dots */
-  --accent-rgb:255,178,36;
-  --accent-soft:#ffcf6b; /* focus rings */
-  --accent-fill:#ffb224; /* selected chips */
-  --on-accent:#241a02;   /* type on that fill — amber is too light for white */
-  --disc-hi:#ffd98a;     /* the Feed me disc, lit from upper-left */
-  --disc-mid:#ffb224;
-  --disc-lo:#d98c0c;
-  --sub-opacity:.75;     /* 'tap once · eat' */
+  --accent:#ff2626;      /* neon sign: logo, glows, cooking dots */
+  --accent-rgb:255,38,38;
+  --accent-soft:#ff7a7a; /* focus rings */
+  --accent-fill:#d10000; /* selected chips — darker than the neon so white type clears AA */
+  --on-accent:#fff;
+  --disc-hi:#ff6a6a;     /* the Feed me disc, lit from upper-left */
+  --disc-mid:#ee0000;
+  --disc-lo:#9c0000;
+  --sub-opacity:1;       /* 'tap once · eat' — any less drops under AA on red */
 
-  --cta:#e4572e;         /* Open in YouTube keeps its own red, distinct from the accent */
-  --cta-rgb:228,87,46;
+  --cta:#d10000;         /* with a red accent the CTA can't hold its own hue */
+  --cta-rgb:209,0,0;
   --on-cta:#fff;
 
-  --ink-dim:#a89a78;
-  --ink:#f2ead6;
-  --footer-ink:#5c543a;
-  --paper:#faf5e9;       /* order ticket */
-  --paper-ink:#221c10;
-  --paper-dim:#77704f;
-  --paper-rule:#b9b092;
+  --ink-dim:#a89898;
+  --ink:#f4ecec;
+  --footer-ink:#5f4a4a;
+  --paper:#f8f4f1;       /* order ticket */
+  --paper-ink:#1e1616;
+  --paper-dim:#736a6a;
+  --paper-rule:#c9bcbc;
 
   --sans:-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
   --display:"Bricolage Grotesque", var(--sans);
