@@ -43,11 +43,12 @@ Every colour the app uses is a variable in the `:root` block at the top of
 [`styles.css`](styles.css) — nothing below that block hardcodes one. Repainting the app is
 that block plus the icon.
 
-Three palettes exist as commits on `main`, so you can flip between them:
+`main` ships **orange**. The two palettes it was chosen over are tagged, so you can flip
+back and look:
 
 ```bash
-git log --oneline          # find the palette commits
-git checkout <sha>         # then hard-reload the page
+git checkout palette-gold   # or palette-red, then hard-reload
+git checkout main           # back to orange
 ```
 
 | | accent | fill / type on it | CTA |
