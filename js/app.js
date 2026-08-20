@@ -1,7 +1,7 @@
 import { loadCatalog } from "./catalog.js";
+import { OVERRUN, pickFrom, hasMore, fitText } from "./picker.js";
 
 const MAX_PICKS = 3;          // 1 pick + 2 rerolls, then you choose from the 3
-const OVERRUN = 1.5;          // a pick may run to 1.5x the meal before it counts as a stretch
 const PLATING_MS = 850;       // how long the "On it." beat lasts
 const ORDER_KEY = "feedr.orderNo";
 
@@ -10,7 +10,7 @@ const SCREENS = ["s0","s1","s2","s3","s4","s5","s6"];
 
 let CATALOG = [];
 let LENGTHS = [], MOODS = [];
-let mealLen, mood, round = [], current = "s0";
+let mealLen, mood, round = [], current = "s0", plating = false;
 let orderNo = Number(localStorage.getItem(ORDER_KEY)) || 0;   // survives a relaunch
 
 /* ---------- screens ---------- */
@@ -49,56 +49,26 @@ function renderMenu(){
 
 /* ---------- the pick ---------- */
 
-function remaining(){
-  const served = round.map(v => v.id);
-  return CATALOG.filter(v => v.mood === mood && !served.includes(v.id));
-}
-
-function pick(){
-  const pool = remaining();
-  if(!pool.length) return null;
-
-  // Closest-two-then-coin-flip alone will hand you a 2-hour podcast for a 20-minute lunch
-  // whenever the mood is thin. Anything you can't finish in half again the meal is a
-  // stretch, so it only gets served once everything that fits has been offered.
-  const fits = pool.filter(v => v.min <= mealLen * OVERRUN);
-  const bench = fits.length ? fits : pool;
-
-  // Three picks from the same channel is a boring round, so skip channels already served.
-  // A preference, not a rule — runtime fit still wins, since being handed the wrong length
-  // is worse than being handed the same channel twice.
-  const servedChannels = new Set(round.map(v => v.channel));
-  const fresh = bench.filter(v => !servedChannels.has(v.channel));
-  const shortlist = fresh.length ? fresh : bench;
-
-  shortlist.sort((a,b) => Math.abs(a.min - mealLen) - Math.abs(b.min - mealLen));
-
-  // Coin-flip between the two closest keeps repeat rounds from being identical — but only
-  // when both actually fit. With nothing in range, take the closest and nothing else.
-  const top = fits.length ? shortlist.slice(0,2) : shortlist.slice(0,1);
-  return top[Math.floor(Math.random() * top.length)];
-}
-
-function fitText(v){
-  if(v.min >= 60) return "BOTTOMLESS — PAUSE WHEN YOU'RE FULL";
-  const d = v.min - mealLen;
-  if(Math.abs(d) <= 3) return "FITS YOUR MEAL EXACTLY";
-  if(d < 0) return "SHORT & SWEET — ROOM FOR DESSERT";
-  if(v.min > mealLen * OVERRUN) return "RUNS LONG — YOU'LL BE PAUSING THIS ONE";
-  return "RUNS LONG — CHEF'S CHOICE";
-}
+const pick = () => pickFrom(CATALOG, mood, mealLen, round);
 
 const watchUrl = v => "https://www.youtube.com/watch?v=" + v.id;
 
 /* ---------- serving ---------- */
 
 function serve(){
-  if(round.length >= MAX_PICKS || (round.length && !remaining().length)) return lastCall();
+  if(plating) return;                        // a second tap mid-plating must not start a pick
+  if(round.length >= MAX_PICKS) return lastCall();
   const v = pick();
-  if(!v) return;
+  if(!v) return round.length ? lastCall() : undefined;
+
+  // Claim it now, not when the ticket prints. The old code pushed inside the timeout, so a
+  // reroll tapped during the 850ms beat picked against a stale round and could serve a
+  // duplicate.
+  round.push(v);
+  plating = true;
   goto("s3");
   setTimeout(() => {
-    round.push(v);
+    plating = false;
     orderNo++;
     localStorage.setItem(ORDER_KEY, orderNo);
 
@@ -106,10 +76,11 @@ function serve(){
     $("tTime").textContent = new Date().toLocaleTimeString([], {hour:"2-digit", minute:"2-digit"});
     $("tTitle").textContent = v.title;
     $("tMeta").textContent = v.channel + " · " + v.min + " MIN";
-    $("tFit").textContent = "→ " + fitText(v);
+    $("tFit").textContent = "→ " + fitText(v, mealLen);
     $("openBtn").href = watchUrl(v);            // a real anchor: survives standalone PWAs
 
-    const left = MAX_PICKS - round.length, more = remaining().length > 0;
+    const left = MAX_PICKS - round.length;
+    const more = hasMore(CATALOG, mood, round);
     const btn = $("rerollBtn");
     btn.textContent = (left > 0 && more) ? "not this (" + left + " left)" : "view all " + round.length;
     btn.onclick = (left > 0 && more) ? serve : lastCall;
@@ -121,6 +92,10 @@ function serve(){
 }
 
 function lastCall(){
+  // a thin mood can run out of fresh channels before three, so don't promise three
+  $("lcSub").textContent = round.length === MAX_PICKS
+    ? "that's your three. pick one & eat"
+    : "that's all the kitchen's got. pick one & eat";
   const lc = $("lcOpts");
   lc.replaceChildren(...round.map(v => {
     const a = document.createElement("a");

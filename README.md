@@ -13,7 +13,8 @@ Zero dependencies, zero build step. It's a static site.
 ```
 index.html              the six screens, markup only
 styles.css              the diner — palette lives in :root
-js/app.js               flow, picking, rerolls, last call
+js/app.js               screens, flow, rerolls, last call
+js/picker.js            the picking rules — pure, no DOM, directly testable
 js/catalog.js           loads + validates data/catalog.json
 data/catalog.json       ← the only file you need to edit
 manifest.webmanifest    home-screen install
@@ -92,19 +93,32 @@ labels it ("RUNS LONG", or "BOTTOMLESS" past an hour). Among the videos that fit
 coin between the two closest to the meal length so repeat rounds aren't identical. If nothing in
 the mood fits at all, it serves the single closest rather than gambling across a huge gap.
 
-Within a round it also avoids repeating a channel, so three rerolls give three different
-creators. Preference, not rule — the fallback order is:
+Two exclusions are **hard rules**, not preferences, because variety is the product:
 
-1. fits the meal + fresh channel
-2. fits the meal + repeat channel
-3. over-long + fresh channel
-4. over-long + repeat channel
+- never the same video twice in a round
+- never the same channel twice in a round
 
-Runtime fit deliberately outranks channel variety: being handed the wrong length is worse than
-being handed the same channel twice. **A mood needs at least 3 distinct channels** at a given
-length to guarantee a repeat-free round.
+When they leave nothing to serve, the round **ends early** rather than repeating itself — the
+last-call screen then says "that's all the kitchen's got" instead of promising three. So a mood
+needs at least 3 distinct channels to produce a full three-pick round. Game show has two, so it
+gives rounds of two until it gains a third channel.
 
-That multiplier is `OVERRUN` at the top of [`js/app.js`](js/app.js).
+The picking logic lives in [`js/picker.js`](js/picker.js) as pure functions with no DOM, so it
+can be exercised directly at thousands of rounds a second — the app imports the same file that
+gets tested, rather than a copy of it. `OVERRUN` is at the top of that module.
+
+```js
+// paste into the console on a running Feedr to re-check the rules
+const {pickFrom} = await import('/js/picker.js');
+const cat = await (await fetch('/data/catalog.json')).json();
+for (const m of cat.moods) for (const l of cat.lengths) for (let t=0; t<3000; t++) {
+  const round = [];
+  for (let i=0; i<3; i++) { const v = pickFrom(cat.videos, m.id, l.minutes, round); if(!v) break; round.push(v); }
+  const ids = round.map(v=>v.id), ch = round.map(v=>v.channel);
+  console.assert(ids.length === new Set(ids).size, 'duplicate video', m.label, l.label);
+  console.assert(ch.length === new Set(ch).size, 'duplicate channel', m.label, l.label);
+}
+```
 
 Order numbers persist in `localStorage`, so the ticket keeps counting across relaunches instead
 of resetting to #001 every time you open the app.
@@ -152,7 +166,7 @@ still needs a connection, obviously).
 
 ## Shipping an update
 
-Edit files, then bump `CACHE` in [`sw.js`](sw.js) (`feedr-counter-v1` → `-v2`) and deploy. The old
+Edit files, then bump `CACHE` in [`sw.js`](sw.js) (`feedr-counter-v2` → `-v3`) and deploy. The old
 cache is dropped on next launch. Catalog edits alone don't need a bump — `catalog.json` is fetched
 network-first. If you add a new file to the app shell, add it to `SHELL` in `sw.js` too, or it
 won't be there offline.

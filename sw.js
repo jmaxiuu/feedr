@@ -1,6 +1,6 @@
 /* Feedr service worker — offline shell + always-fresh catalog.
    Bump CACHE whenever you change a shell file, so phones drop the old copy. */
-const CACHE = "feedr-counter-v1";
+const CACHE = "feedr-counter-v2";
 
 const SHELL = [
   "./",
@@ -13,6 +13,7 @@ const SHELL = [
   "./fonts/courier-prime-700-latin.woff2",
   "./fonts/courier-prime-700-latin-ext.woff2",
   "./js/app.js",
+  "./js/picker.js",
   "./js/catalog.js",
   "./data/catalog.json",
   "./manifest.webmanifest",
