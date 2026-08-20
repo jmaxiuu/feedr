@@ -13,9 +13,9 @@ from pathlib import Path
 
 OUT = Path(__file__).resolve().parent.parent / "icons"
 
-BG = (0x12, 0x0D, 0x09)
-PLAY = (0x2B, 0x1A, 0x06)
-STOPS = [(0.00, (0xFF, 0xC0, 0x73)), (0.42, (0xFF, 0x8C, 0x1A)), (1.00, (0xC2, 0x5F, 0x00))]
+BG = (0x0D, 0x12, 0x0E)
+PLAY = (0xF6, 0xEF, 0xDB)
+STOPS = [(0.00, (0xFF, 0x70, 0x80)), (0.42, (0xFF, 0x2D, 0x46)), (1.00, (0xB3, 0x08, 0x1E))]
 
 
 def lerp(a, b, t):
@@ -97,7 +97,7 @@ def render(size, maskable=False, square=False):
 
             ring_a = coverage(abs(math.hypot(x - cx, y - cy) - ring) - ring_w / 2)
             if ring_a > 0:
-                col = over(col, (0xFF, 0x8C, 0x1A), ring_a * 0.13)
+                col = over(col, (0xFF, 0x2D, 0x46), ring_a * 0.16)
 
             disc_a = coverage(math.hypot(x - cx, y - cy) - r)
             if disc_a > 0:

@@ -1,13 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Feedr">
   <defs>
     <radialGradient id="neon" cx="32%" cy="28%" r="99%">
-      <stop offset="0" stop-color="#ffc073"/>
-      <stop offset="0.42" stop-color="#ff8c1a"/>
-      <stop offset="1" stop-color="#c25f00"/>
+      <stop offset="0" stop-color="#ff7080"/>
+      <stop offset="0.42" stop-color="#ff2d46"/>
+      <stop offset="1" stop-color="#b3081e"/>
     </radialGradient>
   </defs>
-  <rect width="512" height="512" rx="114" fill="#120d09"/>
-  <circle cx="256" cy="256" r="184" fill="none" stroke="#ff8c1a" stroke-opacity="0.13" stroke-width="20"/>
+  <rect width="512" height="512" rx="114" fill="#0d120e"/>
+  <circle cx="256" cy="256" r="184" fill="none" stroke="#ff2d46" stroke-opacity="0.16" stroke-width="20"/>
   <circle cx="256" cy="256" r="156" fill="url(#neon)"/>
-  <path d="M209 187 L209 325 L328 256 Z" fill="#2b1a06"/>
+  <path d="M209 187 L209 325 L328 256 Z" fill="#f6efdb"/>
 </svg>

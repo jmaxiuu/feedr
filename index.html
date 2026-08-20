@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Feedr — dinner's on, video's picked</title>
-<meta name="description" content="One tap picks what you watch while you eat. No scrolling, no menu paralysis.">
+<title>Feedr — The Counter</title>
+<meta name="description" content="Sit down. The kitchen picks, you eat. One tap and Feedr serves you something to watch while you eat.">
 
-<meta name="theme-color" content="#120d09">
+<meta name="theme-color" content="#0d120e">
 <meta name="color-scheme" content="dark">
 
 <!-- installable on iOS home screen -->
@@ -26,58 +26,72 @@
 </head>
 <body>
 <div class="phone">
-  <header>
-    <div class="logo">Feedr<em>.</em></div>
-    <div class="tag">no scroll · just eat</div>
-  </header>
-
-  <div class="controls" id="controls">
-    <div class="label">How long is this meal?</div>
-    <div class="chips" id="lenChips"></div>
-    <div class="label">What flavor tonight?</div>
-    <div class="chips" id="moodChips"></div>
+  <div class="topbar">
+    <button class="back" id="backBtn" disabled aria-label="Back">←</button>
+    <span class="wordmark">Feedr<i>.</i></span>
+    <span class="step" id="stepLbl">&nbsp;</span>
   </div>
 
-  <div class="stage">
-    <div id="idle" style="text-align:center">
-      <button class="feed-btn" id="feedBtn">Feed me<span>tap once · eat</span></button>
-      <div class="hint">One tap. Zero scrolling.</div>
-    </div>
+  <!-- 0: landing -->
+  <div class="screen" id="s0">
+    <div class="ask">Hungry<i>?</i></div>
+    <div class="sub">sit down. the kitchen picks, you eat.</div>
+    <button class="go" id="startBtn">Yeah, feed me</button>
+  </div>
 
-    <div class="cooking" id="cooking">
-      <div class="dots">● ● ●</div>
-      <p>Plating your pick…</p>
-    </div>
+  <!-- 1: length -->
+  <div class="screen hidden" id="s1">
+    <div class="ask">How long<br>you got<i>?</i></div>
+    <div class="sub">your video should end when your plate does</div>
+    <div class="opts" id="lenOpts"></div>
+  </div>
 
-    <div class="ticket-wrap" id="ticketWrap">
-      <div class="ticket" id="ticket">
-        <div class="t-head"><span id="orderNo">Order #0001</span><span id="orderTime"></span></div>
-        <div class="t-rule"></div>
-        <div class="t-eyebrow">Tonight's pick</div>
-        <div class="t-title" id="tTitle"></div>
-        <div class="t-meta" id="tMeta"></div>
-        <div class="t-fit" id="tFit"></div>
-      </div>
-      <div class="chooser" id="chooser">
-        <div class="chooser-head">Kitchen's closed — pick one 🍽</div>
-      </div>
-      <div class="t-actions" id="tActions">
-        <button class="btn btn-yt" id="openBtn">▶ &nbsp;Open in YouTube</button>
-        <div class="btn-row">
-          <button class="btn btn-ghost" id="rerollBtn">↻ Not this</button>
-          <button class="btn btn-ghost" id="backBtn">← Change meal</button>
-        </div>
-      </div>
-    </div>
+  <!-- 2: mood -->
+  <div class="screen hidden" id="s2">
+    <div class="ask">What's the<br>mood<i>?</i></div>
+    <div class="sub">one tap. kitchen handles the rest</div>
+    <div class="opts" id="moodOpts"></div>
+  </div>
 
-    <div class="fault" id="fault">
-      <div class="dots">✕</div>
-      <p id="faultMsg">Kitchen's shut.</p>
-      <button class="btn btn-ghost" id="retryBtn">↻ Try again</button>
+  <!-- 3: cooking -->
+  <div class="cookwrap hidden" id="s3">
+    <div class="cook-big">On it.</div>
+    <div class="cook-sub">kitchen's plating your order <b>■ ■ ■</b></div>
+  </div>
+
+  <!-- 4: serve -->
+  <div class="servewrap hidden" id="s4">
+    <div class="ticket" id="ticket">
+      <div class="t-row"><span id="tNo">ORDER #001</span><span id="tTime"></span></div>
+      <div class="t-dash"></div>
+      <div class="t-title" id="tTitle"></div>
+      <div class="t-meta" id="tMeta"></div>
+      <div class="t-fit" id="tFit"></div>
+    </div>
+    <div class="acts">
+      <a class="go" id="openBtn" href="https://www.youtube.com/" target="_blank" rel="noopener">Open in YouTube ▶</a>
+      <div class="rowlinks">
+        <button class="tl" id="rerollBtn">not this (2 left)</button>
+        <button class="tl dim" id="overBtn">start over</button>
+      </div>
     </div>
   </div>
 
-  <footer>Feedr picks · YouTube plays</footer>
+  <!-- 5: last call -->
+  <div class="screen hidden" id="s5">
+    <div class="lc-title">Kitchen's<br>closed<i>.</i></div>
+    <div class="sub" style="margin-bottom:16px">that's your three. pick one &amp; eat</div>
+    <div id="lcOpts"></div>
+  </div>
+
+  <!-- 6: the catalog failed to load -->
+  <div class="screen hidden" id="s6">
+    <div class="ask">Kitchen's<br>shut<i>.</i></div>
+    <div class="sub" id="faultMsg">something's wrong with the pantry</div>
+    <button class="go" id="retryBtn">Try again</button>
+  </div>
+
+  <div class="marquee"><span>Open all night /// no scrolling /// the kitchen decides /// your food's getting cold /// Feedr /// </span></div>
 </div>
 
 <script type="module" src="js/app.js"></script>

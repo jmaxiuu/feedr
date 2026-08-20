@@ -1,17 +1,17 @@
 {
-  "$comment": "Feedr catalog. Edit this file to change the app — no code changes needed. Each video's `mood` must match a mood `id` below. `min` is the runtime in minutes; the picker prefers videos closest to the chosen meal length.",
+  "$comment": "Feedr catalog. Edit this file to change the app — no code changes needed. Each video's `mood` must match a mood `id` below. `min` is the runtime in minutes; the picker prefers videos closest to the chosen meal length. A mood's `tag` is the small line shown beside its name on the mood screen.",
   "lengths": [
     {"minutes": 10, "label": "Snack", "sub": "~10 min"},
     {"minutes": 20, "label": "Lunch", "sub": "~20 min", "default": true},
     {"minutes": 35, "label": "Dinner", "sub": "30+ min"}
   ],
   "moods": [
-    {"id": "comfort", "label": "Lifestyle/Comfort", "default": true},
-    {"id": "learn", "label": "Learn something"},
-    {"id": "mystery", "label": "Internet mystery"},
-    {"id": "funny", "label": "Fun(ny)"},
-    {"id": "gameshow", "label": "Game show"},
-    {"id": "essay", "label": "Video essays"}
+    {"id": "comfort", "label": "Lifestyle/Comfort", "default": true, "tag": "cozy · slow"},
+    {"id": "learn", "label": "Learn something", "tag": "brain food"},
+    {"id": "mystery", "label": "Internet mystery", "tag": "rabbit hole"},
+    {"id": "funny", "label": "Fun(ny)", "tag": "no thoughts"},
+    {"id": "gameshow", "label": "Game show", "tag": "chaos · mates"},
+    {"id": "essay", "label": "Video essays", "tag": "long thoughts"}
   ],
   "videos": [
     { "id": "d1mvOwTmeBY", "title": "My mom came to new york ", "channel": "Cotton ryan", "min": 12, "mood": "comfort" },

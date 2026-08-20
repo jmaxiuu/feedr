@@ -1,6 +1,6 @@
 /* Feedr service worker — offline shell + always-fresh catalog.
    Bump CACHE whenever you change a shell file, so phones drop the old copy. */
-const CACHE = "feedr-orange-v2";
+const CACHE = "feedr-counter-v1";
 
 const SHELL = [
   "./",
