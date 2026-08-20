@@ -6,10 +6,10 @@
     {"minutes": 35, "label": "Dinner", "sub": "30+ min"}
   ],
   "moods": [
-    {"id": "comfort", "label": "Comfort", "default": true},
+    {"id": "comfort", "label": "Lifestyle/Comfort", "default": true},
     {"id": "learn", "label": "Learn something"},
     {"id": "mystery", "label": "Internet mystery"},
-    {"id": "funny", "label": "Funny"},
+    {"id": "funny", "label": "Fun(ny)"},
     {"id": "gameshow", "label": "Game show"},
     {"id": "essay", "label": "Video essays"}
   ],
@@ -55,6 +55,7 @@
     { "id": "jf9I04Oa-hU", "title": "Nathan For You - Fixing Computer Repair", "channel": "Comedy Central", "min": 7, "mood": "funny" },
     { "id": "NO8V72pDw1o", "title": "Nathan For You - Frozen Yogurt", "channel": "Comedy Central", "min": 8, "mood": "funny" },
     { "id": "n7BlydBMAVU", "title": "Nathan For You - The Ghost Realtor", "channel": "Comedy Central", "min": 11, "mood": "funny" },
+    { "id": "iugdCL7l09c", "title": "We Forced Old People to Spend a Wholesome Day with Us", "channel": "Friends From Work", "min": 32, "mood": "funny" },
     { "id": "Dd7FixvoKBw", "title": "Substitute Teacher", "channel": "Key & Peele", "min": 3, "mood": "funny" },
     { "id": "WLAq3JVJ6Ho", "title": "Substitute Teacher Pt. 2", "channel": "Key & Peele", "min": 4, "mood": "funny" },
     { "id": "RrFTC23tCu4", "title": "25 Mins of the Best Sketches", "channel": "Key & Peele", "min": 25, "mood": "funny" },
