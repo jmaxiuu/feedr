@@ -20,6 +20,7 @@ manifest.webmanifest    home-screen install
 sw.js                   offline shell
 icons/                  app icons (icon.svg is the source of truth)
 fonts/                  self-hosted woff2 — see Typography
+tools/serve.py          local dev server (no-cache — use this, not http.server)
 tools/add-video.py      adds videos with verified metadata
 tools/make-icons.py     regenerates the PNG icons from icon.svg's shapes
 ```
@@ -113,10 +114,15 @@ of resetting to #001 every time you open the app.
 The catalog is fetched, so `file://` won't work — you need a server:
 
 ```bash
-cd feedr && python3 -m http.server 8000
+python3 tools/serve.py
 ```
 
-Then open http://localhost:8000. To try it from your phone on the same Wi‑Fi, use your Mac's LAN
+Then open http://localhost:8765. Use this rather than `python3 -m http.server`: plain
+http.server sends no cache headers, so browsers apply heuristic caching and will serve you an
+old `styles.css` against a new `index.html` — which looks exactly like the app is broken. This
+one sends `Cache-Control: no-store`. If you do hit a stale page, hard-reload (⌘⇧R).
+
+To try it from your phone on the same Wi‑Fi, use your Mac's LAN
 address (`ipconfig getifaddr en0`) — though note that install-to-home-screen and the service
 worker only work over HTTPS or on `localhost`.
 
