@@ -72,6 +72,9 @@
     { "id": "NO8V72pDw1o", "title": "Nathan For You - Frozen Yogurt", "channel": "Comedy Central", "min": 8, "mood": "funny" },
     { "id": "n7BlydBMAVU", "title": "Nathan For You - The Ghost Realtor", "channel": "Comedy Central", "min": 11, "mood": "funny" },
     { "id": "iugdCL7l09c", "title": "We Forced Old People to Spend a Wholesome Day with Us", "channel": "Friends From Work", "min": 32, "mood": "funny" },
+    { "id": "Ks_dZgzwDg4", "title": "Asking 100 girls for head on Tinder (Chad Edition)  | Tinder Experiment", "channel": "Gerbert Johnson", "min": 12, "mood": "funny" },
+    { "id": "4-d-ZoTbU6g", "title": "Going on Dating Apps as a Hot Girl (Brutal)", "channel": "Gerbert Johnson", "min": 12, "mood": "funny" },
+    { "id": "7GvjJ4cVHKs", "title": "Confessions Of A B*tchless Zoomer", "channel": "Gerbert Johnson", "min": 16, "mood": "funny" },
     { "id": "Dd7FixvoKBw", "title": "Substitute Teacher", "channel": "Key & Peele", "min": 3, "mood": "funny" },
     { "id": "WLAq3JVJ6Ho", "title": "Substitute Teacher Pt. 2", "channel": "Key & Peele", "min": 4, "mood": "funny" },
     { "id": "RrFTC23tCu4", "title": "25 Mins of the Best Sketches", "channel": "Key & Peele", "min": 25, "mood": "funny" },
@@ -80,11 +83,21 @@
     { "id": "lqAFHewbG9Q", "title": "Blind Dating Girls Based On Their Outfits Ft Deji", "channel": "Beta Squad", "min": 20, "mood": "gameshow" },
     { "id": "8NPSL9rCOss", "title": "We Challenged Bounty Hunters To Hide And Seek", "channel": "Beta Squad", "min": 23, "mood": "gameshow" },
     { "id": "sGNfA2iRNFw", "title": "Fit Through The Hole: Beta Squad vs YouTube Allstars", "channel": "Beta Squad", "min": 36, "mood": "gameshow" },
+    { "id": "iWMrlaFerfI", "title": "9 People vs Christmas Quiz", "channel": "Extra Medium Stuff", "min": 22, "mood": "gameshow" },
+    { "id": "55wBK6j3iF8", "title": "Ages 1 - 90 vs Song Quiz", "channel": "Extra Medium Stuff", "min": 23, "mood": "gameshow" },
+    { "id": "2EQgefzEGjM", "title": "10 People vs Geography Quiz", "channel": "Extra Medium Stuff", "min": 26, "mood": "gameshow" },
+    { "id": "X8-XONOUFi8", "title": "10 Couples vs General Knowledge Quiz", "channel": "Extra Medium Stuff", "min": 29, "mood": "gameshow" },
     { "id": "wSnq36pGibc", "title": "Match The Height To The Person", "channel": "Kevin Langue", "min": 25, "mood": "gameshow" },
     { "id": "juXWXv6U7sA", "title": "5 Teenagers vs 1 Secret 30yr Old", "channel": "Kevin Langue", "min": 29, "mood": "gameshow" },
     { "id": "k89kCejMM-s", "title": "5 Humans vs 1 Secret Animal", "channel": "Kevin Langue", "min": 29, "mood": "gameshow" },
     { "id": "mXBDGCHC1pI", "title": "$1 vs $1 Million Magician", "channel": "Kevin Langue", "min": 48, "mood": "gameshow" },
+    { "id": "JbgPKono22c", "title": "BOV BOYS GUESS THE SUGAR DADDY", "channel": "The Bov Boys", "min": 40, "mood": "gameshow" },
+    { "id": "1jGza9Gi6qs", "title": "BOV BOYS FIND GINGE LOVE", "channel": "The Bov Boys", "min": 48, "mood": "gameshow" },
+    { "id": "u2-j_RvZzQU", "title": "BOV BOYS BLIND DATING", "channel": "The Bov Boys", "min": 50, "mood": "gameshow" },
 
+    { "id": "O4-k0_HJjTI", "title": "Why Young Men Aren't Growing Up", "channel": "Gerbert Johnson", "min": 12, "mood": "essay" },
+    { "id": "hIRFiEzmn0Y", "title": "Guide to Escape Media Consumption", "channel": "Gerbert Johnson", "min": 17, "mood": "essay" },
+    { "id": "3JSTQ2c3-uk", "title": "Death Of The Family", "channel": "Gerbert Johnson", "min": 25, "mood": "essay" },
     { "id": "g9P1C4MxqcY", "title": "What Makes This Movie (And It's Big Twist) So Horrifying", "channel": "Green Reels", "min": 8, "mood": "essay" },
     { "id": "DNGXsbZHMMI", "title": "On the Heights of Despair", "channel": "Horses ", "min": 16, "mood": "essay" },
     { "id": "mDjrTkssZmE", "title": "O, Death!", "channel": "Horses ", "min": 21, "mood": "essay" },
@@ -101,6 +114,7 @@
     { "id": "rbzm_RyS-Uk", "title": "to be loved is to be understood, but to be human is to change", "channel": "oliSUNvia", "min": 20, "mood": "essay" },
     { "id": "qgBU3ch6T1s", "title": "why grief is good for us: finding value in harsh loss", "channel": "oliSUNvia", "min": 21, "mood": "essay" },
     { "id": "Na2526BD-l8", "title": "when is it ethical to believe without evidence?", "channel": "oliSUNvia", "min": 25, "mood": "essay" },
-    { "id": "qQU8HBzKpTU", "title": "Why the Epstein Files Didn't Start a Revolution", "channel": "uncivilized ", "min": 25, "mood": "essay" }
+    { "id": "qQU8HBzKpTU", "title": "Why the Epstein Files Didn't Start a Revolution", "channel": "uncivilized ", "min": 25, "mood": "essay" },
+    { "id": "RO0gURxe7gY", "title": "the new ... American Dream", "channel": "zoeunlimited", "min": 16, "mood": "essay" }
   ]
 }
