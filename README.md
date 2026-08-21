@@ -120,6 +120,21 @@ for (const m of cat.moods) for (const l of cat.lengths) for (let t=0; t<3000; t+
 }
 ```
 
+### The line on the ticket
+
+The first plate of a round carries one line, under the ticket and above the CTA:
+
+> — first bite's the hard one. after that you just eat.
+
+That's the argument of the whole app in one sentence. Doomscrolling isn't a failure of choice,
+it's a failure to *commit* — the next thumbnail is always plausibly better, so the first click
+never happens. Feedr removes the search but not the temptation, which is why the line sits
+exactly where the temptation lives: next to "not this".
+
+It shows on **pick 1 only**. Repeating it on every reroll would turn an idea into nagging.
+The marquee carries the same thought more quietly ("the first bite is the hardest", "stop
+looking for better").
+
 Order numbers persist in `localStorage`, so the ticket keeps counting across relaunches instead
 of resetting to #001 every time you open the app.
 
@@ -166,7 +181,7 @@ still needs a connection, obviously).
 
 ## Shipping an update
 
-Edit files, then bump `CACHE` in [`sw.js`](sw.js) (`feedr-counter-v2` → `-v3`) and deploy. The old
+Edit files, then bump `CACHE` in [`sw.js`](sw.js) (`feedr-counter-v3` → `-v4`) and deploy. The old
 cache is dropped on next launch. Catalog edits alone don't need a bump — `catalog.json` is fetched
 network-first. If you add a new file to the app shell, add it to `SHELL` in `sw.js` too, or it
 won't be there offline.

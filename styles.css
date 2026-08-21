@@ -147,6 +147,10 @@ body{
 .t-title{font-family:var(--sans);font-weight:800;font-size:22px;letter-spacing:-.03em;line-height:1.1;margin:2px 0 6px}
 .t-meta{font-size:11px;color:var(--paper-dim);text-transform:uppercase;letter-spacing:.04em}
 .t-fit{font-size:11px;margin-top:8px}
+/* the whole point of the app, said once — only on the first pick of a round, where the
+   urge to keep looking is strongest. Nagging it on every reroll would be scolding. */
+.bite{font-family:var(--mono);font-size:11px;line-height:1.5;color:var(--ink-dim);margin-top:14px}
+.bite::before{content:"— ";color:var(--red)}
 .acts{margin-top:14px;display:flex;flex-direction:column;gap:10px}
 .rowlinks{display:flex;justify-content:space-between}
 .tl{background:none;border:none;cursor:pointer;font-family:var(--mono);font-size:12px;color:var(--ink);text-decoration:underline;text-underline-offset:3px;padding:6px 0}

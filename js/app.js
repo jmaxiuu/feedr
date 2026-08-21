@@ -79,6 +79,9 @@ function serve(){
     $("tFit").textContent = "→ " + fitText(v, mealLen);
     $("openBtn").href = watchUrl(v);            // a real anchor: survives standalone PWAs
 
+    // say it once, on the first plate, where "maybe the next one's better" starts
+    $("biteNote").classList.toggle("hidden", round.length !== 1);
+
     const left = MAX_PICKS - round.length;
     const more = hasMore(CATALOG, mood, round);
     const btn = $("rerollBtn");
