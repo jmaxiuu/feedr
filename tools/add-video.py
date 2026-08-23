@@ -39,21 +39,34 @@ def video_id(s):
 
 def fetch(vid):
     url = f"https://www.youtube.com/watch?v={vid}"
+    if not YTDLP:
+        sys.exit("yt-dlp not found. Install it and/or set YTDLP=/path/to/yt-dlp — see the "
+                 "docstring. Runtimes must be measured, not guessed.")
+
     try:
         with urllib.request.urlopen(
             f"https://www.youtube.com/oembed?url={url}&format=json", timeout=20) as r:
             meta = json.load(r)
+        title, channel = meta["title"].strip(), meta["author_name"]
     except Exception as e:
-        sys.exit(f"{vid}: not reachable via oEmbed — wrong id, private or deleted? ({e})")
-    if not YTDLP:
-        sys.exit("yt-dlp not found. Install it and/or set YTDLP=/path/to/yt-dlp — see the "
-                 "docstring. Runtimes must be measured, not guessed.")
-    out = subprocess.run([YTDLP, "--no-warnings", "--print", "%(duration)s", url],
+        # oEmbed 401s both for a wrong/private/deleted id and for a real, public video
+        # whose uploader just disabled embedding — the error alone can't tell them apart.
+        # Fall back to yt-dlp's own metadata, but only once yt-dlp itself confirms the
+        # video is real and public, so a genuinely bad id still fails loudly.
+        fields = "title", "channel", "availability"
+        print_args = sum((["--print", f"%({f})s"] for f in fields), [])
+        probe = subprocess.run([YTDLP, "--no-warnings", *print_args, url],
+                               capture_output=True, text=True).stdout.splitlines()
+        if len(probe) != len(fields) or probe[2] != "public":
+            sys.exit(f"{vid}: not reachable via oEmbed ({e}), and yt-dlp couldn't confirm "
+                     f"it's a public video either — wrong id, private, or deleted?")
+        title, channel = probe[0], probe[1]
+
+    dur = subprocess.run([YTDLP, "--no-warnings", "--print", "%(duration)s", url],
                          capture_output=True, text=True).stdout.strip()
-    if not out.isdigit():
+    if not dur.isdigit():
         sys.exit(f"{vid}: yt-dlp returned no duration")
-    return dict(id=vid, title=meta["title"].strip(), channel=meta["author_name"],
-                min=round(int(out) / 60))
+    return dict(id=vid, title=title, channel=channel, min=round(int(dur) / 60))
 
 
 def write(d):

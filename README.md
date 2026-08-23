@@ -73,6 +73,8 @@ It takes bare ids, watch URLs, `youtu.be` links or shorts links, skips anything 
 and rewrites the file in its canonical format. `--check` re-verifies every video already in the
 catalog and reports channels that renamed or runtimes that drifted.
 
+oEmbed 401s for two different reasons that look identical from the outside: a wrong, private or deleted id, or a real public video whose uploader disabled embedding. The second case doesn't affect Feedr — it opens a normal watch-page link, not an iframe embed — so the script falls back to yt-dlp's own metadata, but only once yt-dlp itself confirms the video is public. A genuinely bad id still fails loudly.
+
 Two reasons this matters. A single wrong character in an 11-character id gives you a dead link or
 somebody else's video — during this project a search result put a Beta Squad video on the Chunkz
 channel, and a 16-subscriber account had reuploaded an essay under the original's exact title.
