@@ -78,6 +78,10 @@ somebody else's video — during this project a search result put a Beta Squad v
 channel, and a 16-subscriber account had reuploaded an essay under the original's exact title.
 And `min` drives the whole picker, so a guessed runtime silently breaks meal-length matching.
 
+A video belongs to exactly one mood — the catalog enforces unique ids, so it can't sit in
+two mood lists at once. If a video genuinely spans two, pick the closer fit and note the
+other in a comment; duplicating the row would break the round-integrity checks above.
+
 The `lengths` and `moods` lists drive the two question screens. Add a mood there, give it at least
 one video, and it appears — no code changes. A mood's `tag` is the small line beside its name;
 a length's `sub` is the same. Mark one entry in each list `"default": true` for the launch state.
