@@ -31,6 +31,7 @@
     { "id": "pVwVd7SKzv0", "title": "nothing like summer in nyc", "channel": "mickey galvin", "min": 24, "mood": "comfort" },
 
     { "id": "6NFCP928slk", "title": "When Catholic Actor and Protestant Director Disagree - The Chosen", "channel": "Alex O'Connor", "min": 13, "mood": "learn" },
+    { "id": "YiLkudRIqLg", "title": "Demonstration of how easy it is to stop thinking", "channel": "BSWA Retreats 2011-15 & Media", "min": 3, "mood": "learn" },
     { "id": "MrQ41qf0Rqs", "title": "Before the Comeback: Steve Jobs’ Most Honest Interview (1994) #tech #apple #news", "channel": "BarrancoStudio", "min": 29, "mood": "learn" },
     { "id": "mz4NKBM8hdU", "title": "History of China in a Nutshell", "channel": "BlueJay", "min": 11, "mood": "learn" },
     { "id": "o3FQcd91MIs", "title": "Why The Dumbest Investors Win (it's not why you think)", "channel": "Casual Finance", "min": 5, "mood": "learn" },
@@ -117,6 +118,8 @@
     { "id": "1jGza9Gi6qs", "title": "BOV BOYS FIND GINGE LOVE", "channel": "The Bov Boys", "min": 48, "mood": "gameshow" },
     { "id": "u2-j_RvZzQU", "title": "BOV BOYS BLIND DATING", "channel": "The Bov Boys", "min": 50, "mood": "gameshow" },
 
+    { "id": "nZNKnlfwuI8", "title": "Everything changes when you stop playing it safe", "channel": "Alastair", "min": 8, "mood": "essay" },
+    { "id": "VcSl2JIipr0", "title": "Boredom Is Secretly Rewiring Your Brain", "channel": "Backspace", "min": 3, "mood": "essay" },
     { "id": "O4-k0_HJjTI", "title": "Why Young Men Aren't Growing Up", "channel": "Gerbert Johnson", "min": 12, "mood": "essay" },
     { "id": "hIRFiEzmn0Y", "title": "Guide to Escape Media Consumption", "channel": "Gerbert Johnson", "min": 17, "mood": "essay" },
     { "id": "3JSTQ2c3-uk", "title": "Death Of The Family", "channel": "Gerbert Johnson", "min": 25, "mood": "essay" },
@@ -139,6 +142,7 @@
     { "id": "qgBU3ch6T1s", "title": "why grief is good for us: finding value in harsh loss", "channel": "oliSUNvia", "min": 21, "mood": "essay" },
     { "id": "Na2526BD-l8", "title": "when is it ethical to believe without evidence?", "channel": "oliSUNvia", "min": 25, "mood": "essay" },
     { "id": "qQU8HBzKpTU", "title": "Why the Epstein Files Didn't Start a Revolution", "channel": "uncivilized ", "min": 25, "mood": "essay" },
+    { "id": "RANG3_8nQ64", "title": "use this wisely.", "channel": "yan", "min": 3, "mood": "essay" },
     { "id": "RO0gURxe7gY", "title": "the new ... American Dream", "channel": "zoeunlimited", "min": 16, "mood": "essay" }
   ]
 }
