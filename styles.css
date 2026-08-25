@@ -144,22 +144,21 @@ body{
   .feedback{animation:none}
 }
 
-/* the come-back-from-YouTube check-in. Sits above the ticket — a note from the front of
-   house, not part of the kitchen's paperwork. Shown only once the tab regains focus after
-   the person actually left for a video; see the visibilitychange listener in app.js. */
+/* VARIANT B — comment slip: same paper stock as the ticket, printed before it */
 .feedback{
-  font-family:var(--mono);font-size:11px;letter-spacing:.02em;color:var(--ink-dim);
-  margin-bottom:14px;animation:feedbackIn .25s ease;
+  background:var(--paper);color:var(--paper-ink);font-family:var(--mono);
+  padding:14px 16px;border-radius:2px;margin-bottom:10px;
+  animation:feedbackIn .25s ease;
 }
-.feedback-q{margin-bottom:8px}
-.feedback-btns{display:flex;gap:8px}
+.feedback-q{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--paper-dim);text-align:center;margin-bottom:10px}
+.feedback-btns{display:flex;gap:10px}
 .fb-btn{
-  flex:1;background:none;border:1px solid var(--line);color:var(--ink);
-  font-family:var(--sans);font-weight:700;font-size:13px;padding:10px;border-radius:4px;
-  cursor:pointer;transition:transform .12s ease,border-color .15s ease;
+  flex:1;background:none;border:1px dashed var(--paper-dim);border-radius:2px;
+  color:var(--paper-ink);font-family:var(--sans);font-weight:800;font-size:13px;padding:9px;
+  cursor:pointer;transition:transform .12s ease,border-color .15s ease,color .15s ease;
 }
 .fb-btn:active{transform:scale(.97)}
-.fb-btn:hover{border-color:var(--red)}
+.fb-btn:hover{border-color:var(--red);color:var(--red)}
 .fb-btn:focus-visible{outline:2px solid var(--red);outline-offset:2px}
 @keyframes feedbackIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
 .t-row{display:flex;justify-content:space-between;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--paper-dim)}
