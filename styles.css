@@ -68,7 +68,7 @@
    AND body with position:fixed means there's no document-level scroll to bounce at all;
    the six screens each manage their own internal scrolling below (.screen, .servewrap). */
 html,body{height:100%;overflow:hidden;overscroll-behavior:none}
-html{background:var(--void)}
+html{background:var(--bg)}
 body{
   /* NOT position:fixed. That was tried here and measured, on a real iOS home-screen
      install, to cost 59px off the bottom of the app's own viewport — window.innerHeight
@@ -79,7 +79,7 @@ body{
      overflow:hidden + overscroll-behavior:none on html,body, with nothing here that can
      ever overflow its own box, is what's actually doing the anti-bounce work. */
   min-height:100vh;min-height:100dvh;min-height:-webkit-fill-available;
-  background:var(--void);
+  background:var(--bg);
   display:flex;justify-content:center;align-items:center;
   font-family:var(--sans);
   touch-action:pan-y;
@@ -91,6 +91,13 @@ body{
   display:flex;flex-direction:column;overflow:hidden;position:relative;
 }
 @media(min-width:440px){
+  /* below 440px .phone fills the true edge-to-edge, so body's own background can end up
+     showing through past the WKWebView's own reported viewport on an iOS standalone
+     install — see the note above. Matching body to --bg there (same as .phone) means
+     that whatever shows through has nothing to seam against. --void, the darker "room"
+     colour, is only worth using here at desktop widths where it's a deliberate letterbox
+     around a genuinely inset card. */
+  html,body{background:var(--void)}
   .phone{max-height:820px;border-radius:36px;border:1px solid var(--frame);box-shadow:0 30px 80px rgba(0,0,0,.75)}
 }
 
