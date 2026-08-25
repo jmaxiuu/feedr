@@ -221,7 +221,7 @@ still needs a connection, obviously).
 
 ## Shipping an update
 
-Edit files, then bump `CACHE` in [`sw.js`](sw.js) (`feedr-counter-v7` → `-v8`) and deploy. The old
+Edit files, then bump `CACHE` in [`sw.js`](sw.js) (`feedr-counter-v8` → `-v9`) and deploy. The old
 cache is dropped on next launch. Catalog edits alone don't need a bump — `catalog.json` is fetched
 network-first. If you add a new file to the app shell, add it to `SHELL` in `sw.js` too, or it
 won't be there offline.

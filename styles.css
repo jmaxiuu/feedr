@@ -62,13 +62,19 @@
   --safe-b:env(safe-area-inset-bottom, 0px);
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html,body{height:100%}
+/* Kill the page itself as a scrollable/draggable surface, not just the bounce on it.
+   overscroll-behavior alone doesn't stop iOS Safari's rubber-band — it still drags the
+   whole document a few px and reveals whatever's behind it (black, here). Pinning html
+   AND body with position:fixed means there's no document-level scroll to bounce at all;
+   the six screens each manage their own internal scrolling below (.screen, .servewrap). */
+html,body{height:100%;overflow:hidden;overscroll-behavior:none}
+html{background:var(--void)}
 body{
+  position:fixed;inset:0;
   background:var(--void);
   display:flex;justify-content:center;align-items:center;
-  min-height:100vh;min-height:100dvh;
   font-family:var(--sans);
-  overscroll-behavior:none;
+  touch-action:pan-y;
 }
 .phone{
   width:100%;max-width:400px;
@@ -94,7 +100,7 @@ body{
 .step{letter-spacing:.12em}
 
 /* ---------- question screens ---------- */
-.screen{flex:1;display:flex;flex-direction:column;justify-content:flex-end;padding:0 24px 24px;min-height:0;overflow-y:auto}
+.screen{flex:1;display:flex;flex-direction:column;justify-content:flex-end;padding:0 24px 24px;min-height:0;overflow-y:auto;overscroll-behavior:contain}
 .ask{font-weight:800;font-size:44px;letter-spacing:-.045em;line-height:1.02;margin-bottom:6px;text-wrap:balance}
 .ask i{font-style:normal;color:var(--red)}
 .sub{font-family:var(--mono);font-size:12px;color:var(--ink-dim);margin-bottom:22px}
@@ -129,7 +135,7 @@ body{
 @keyframes pulse{50%{opacity:.2}}
 
 /* ---------- ticket ---------- */
-.servewrap{flex:1;display:flex;flex-direction:column;justify-content:flex-end;padding:0 24px 24px;min-height:0;overflow-y:auto}
+.servewrap{flex:1;display:flex;flex-direction:column;justify-content:flex-end;padding:0 24px 24px;min-height:0;overflow-y:auto;overscroll-behavior:contain}
 .ticket{
   background:var(--paper);color:var(--paper-ink);font-family:var(--mono);
   padding:18px 18px 24px;border-radius:3px;
