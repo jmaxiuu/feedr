@@ -159,6 +159,22 @@ runtime, liked, timestamp — capped at the last 500. Nothing reads that log yet
 [`js/picker.js`](js/picker.js) doesn't use it. It's there to log honestly, not to promise a
 smarter kitchen it doesn't yet have.
 
+### Not recommending what you've already watched
+
+Every time a video is actually opened — the ticket's CTA or a last-call option, either path —
+its id goes into `localStorage` under `feedr.seen`. The picker prefers ids outside that set.
+
+No account needed for this: one device, one browser, one `localStorage` entry already is the
+right-sized "profile" for it. The one thing an actual account-and-backend system would buy you
+is syncing "seen" across devices — if you open Feedr on your phone and your laptop and want
+each to know what the other already served, that needs real auth and a server. Nothing here
+does that; each install keeps its own history.
+
+It's a preference, not a hard wall, the same way `OVERRUN` degrades rather than breaks: once a
+mood has been watched dry at a given length, `pickFrom` falls back to repeating rather than
+returning nothing. A regular who's worked through Game show's short end shouldn't hit a kitchen
+that refuses to serve anything — better a rewatch than an empty round.
+
 Order numbers persist in `localStorage`, so the ticket keeps counting across relaunches instead
 of resetting to #001 every time you open the app.
 
@@ -205,7 +221,7 @@ still needs a connection, obviously).
 
 ## Shipping an update
 
-Edit files, then bump `CACHE` in [`sw.js`](sw.js) (`feedr-counter-v6` → `-v7`) and deploy. The old
+Edit files, then bump `CACHE` in [`sw.js`](sw.js) (`feedr-counter-v7` → `-v8`) and deploy. The old
 cache is dropped on next launch. Catalog edits alone don't need a bump — `catalog.json` is fetched
 network-first. If you add a new file to the app shell, add it to `SHELL` in `sw.js` too, or it
 won't be there offline.

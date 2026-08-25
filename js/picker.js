@@ -12,19 +12,27 @@ export const OVERRUN = 1.5;   // a pick may run to 1.5x the meal before it count
  *   - never the same video twice in a round
  *   - never the same channel twice in a round
  * When they leave nothing, the round ends early rather than repeating itself.
+ *
+ * `seen` is different: it's a lifetime "already watched" set, not a within-round rule, and
+ * it's a preference, not a hard wall. A thin mood a regular gets served from a lot will
+ * eventually run out of unwatched videos entirely — when that happens this falls back to
+ * repeating rather than serving nothing, the same way OVERRUN falls back when nothing fits.
  */
-export function pickFrom(catalog, mood, mealLen, round){
+export function pickFrom(catalog, mood, mealLen, round, seen = new Set()){
   const servedIds = new Set(round.map(v => v.id));
   const servedChannels = new Set(round.map(v => v.channel));
   const pool = catalog.filter(v =>
     v.mood === mood && !servedIds.has(v.id) && !servedChannels.has(v.channel));
   if(!pool.length) return null;
 
+  const unseen = pool.filter(v => !seen.has(v.id));
+  const candidates = unseen.length ? unseen : pool;
+
   // Closest-two-then-coin-flip alone would hand you a 2-hour podcast for a 20-minute lunch
   // whenever the mood is thin. Anything you can't finish in half again the meal is a stretch,
   // so it's only served once everything that fits has been offered.
-  const fits = pool.filter(v => v.min <= mealLen * OVERRUN);
-  const bench = (fits.length ? fits : pool).slice();
+  const fits = candidates.filter(v => v.min <= mealLen * OVERRUN);
+  const bench = (fits.length ? fits : candidates).slice();
   bench.sort((a,b) => Math.abs(a.min - mealLen) - Math.abs(b.min - mealLen));
 
   // Coin-flip between the two closest keeps repeat rounds from being identical — but only

@@ -6,6 +6,7 @@ const PLATING_MS = 850;       // how long the "On it." beat lasts
 const ORDER_KEY = "feedr.orderNo";
 const FEEDBACK_KEY = "feedr.feedback";
 const FEEDBACK_ACK_MS = 1400; // how long "glad it landed." sits before the check-in folds away
+const SEEN_KEY = "feedr.seen";
 
 const $ = id => document.getElementById(id);
 const SCREENS = ["s0","s1","s2","s3","s4","s5","s6"];
@@ -15,6 +16,16 @@ let LENGTHS = [], MOODS = [];
 let mealLen, mood, round = [], current = "s0", plating = false;
 let orderNo = Number(localStorage.getItem(ORDER_KEY)) || 0;   // survives a relaunch
 let feedbackVideo = null;     // the video just sent to YouTube, waiting on a reaction
+
+// Every video id actually opened, ever — not just this round. No account needed for this:
+// one device, one browser, one localStorage entry is exactly the "profile" this wants.
+let seen = new Set(JSON.parse(localStorage.getItem(SEEN_KEY) || "[]"));
+
+function markSeen(v){
+  if(seen.has(v.id)) return;
+  seen.add(v.id);
+  localStorage.setItem(SEEN_KEY, JSON.stringify([...seen]));
+}
 
 /* ---------- screens ---------- */
 
@@ -52,7 +63,7 @@ function renderMenu(){
 
 /* ---------- the pick ---------- */
 
-const pick = () => pickFrom(CATALOG, mood, mealLen, round);
+const pick = () => pickFrom(CATALOG, mood, mealLen, round, seen);
 
 const watchUrl = v => "https://www.youtube.com/watch?v=" + v.id;
 
@@ -120,7 +131,7 @@ function serve(){
     $("tMeta").textContent = v.channel + " · " + v.min + " MIN";
     $("tFit").textContent = "→ " + fitText(v, mealLen);
     $("openBtn").href = watchUrl(v);            // a real anchor: survives standalone PWAs
-    $("openBtn").onclick = () => armFeedback(v);
+    $("openBtn").onclick = () => { armFeedback(v); markSeen(v); };
 
     // say it once, on the first plate, where "maybe the next one's better" starts
     $("biteNote").classList.toggle("hidden", round.length !== 1);
@@ -150,6 +161,7 @@ function lastCall(){
     a.href = watchUrl(v);
     a.target = "_blank";
     a.rel = "noopener";
+    a.onclick = () => markSeen(v);
     const text = document.createElement("span");
     const title = document.createElement("b"); title.textContent = v.title;
     const meta = document.createElement("small"); meta.textContent = v.channel + " · " + v.min + " min";
