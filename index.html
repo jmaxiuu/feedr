@@ -103,43 +103,5 @@
 </div>
 
 <script type="module" src="js/app.js"></script>
-
-<!-- TEMPORARY — diagnosing the iOS standalone-mode black bar. Remove this whole block once
-     that's fixed; it's not part of the app. Pinned to the top so the bottom-gap bug can't
-     hide it, high-contrast so it's readable as a screenshot. -->
-<pre id="diag" style="position:fixed;top:0;left:0;right:0;z-index:99999;margin:0;
-  padding:10px 12px calc(10px + env(safe-area-inset-bottom));
-  background:#ff2d46;color:#fff;font:11px/1.5 ui-monospace,monospace;
-  white-space:pre-wrap;"></pre>
-<script>
-  function paintDiag(){
-    var d = document.getElementById('diag');
-    var phone = document.querySelector('.phone');
-    var pr = phone ? phone.getBoundingClientRect() : null;
-    var cs = phone ? getComputedStyle(phone) : null;
-    var probe = document.createElement('div');
-    probe.style.cssText = 'position:fixed;top:0;height:env(safe-area-inset-top);width:1px;visibility:hidden';
-    document.body.appendChild(probe);
-    var safeTop = probe.getBoundingClientRect().height;
-    probe.style.top = 'auto'; probe.style.bottom = '0'; probe.style.height = 'env(safe-area-inset-bottom)';
-    var safeBottom = probe.getBoundingClientRect().height;
-    probe.remove();
-    d.textContent =
-      'standalone=' + (window.navigator.standalone) +
-      '  DPR=' + window.devicePixelRatio +
-      '\nwindow.innerHeight=' + window.innerHeight +
-      '  visualViewport.height=' + (window.visualViewport ? window.visualViewport.height : 'n/a') +
-      '  screen.height=' + screen.height +
-      '\nsafe-area top=' + safeTop + '  bottom=' + safeBottom +
-      '\n.phone rect: top=' + (pr && pr.top.toFixed(1)) + ' bottom=' + (pr && pr.bottom.toFixed(1)) +
-        ' height=' + (pr && pr.height.toFixed(1)) +
-      '\n.phone computed height=' + (cs && cs.height) +
-      '\nbody computed height=' + getComputedStyle(document.body).height +
-      '\ngap below .phone=' + (pr ? (window.innerHeight - pr.bottom).toFixed(1) : 'n/a') + 'px';
-  }
-  paintDiag();
-  addEventListener('resize', paintDiag);
-  addEventListener('orientationchange', () => setTimeout(paintDiag, 300));
-</script>
 </body>
 </html>
