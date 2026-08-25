@@ -70,7 +70,13 @@
 html,body{height:100%;overflow:hidden;overscroll-behavior:none}
 html{background:var(--void)}
 body{
-  position:fixed;inset:0;
+  /* height matches .phone's own vh->dvh chain exactly, not inset:0 — inset sizes against
+     the fixed-positioning containing block, which iOS Safari can resolve to a different
+     viewport (toolbars retracted) than an explicit 100dvh (toolbars visible). When those
+     disagree .phone falls short of the real bottom edge and --void shows through below it
+     as a dark bar. Same unit chain on both means they can't diverge. */
+  position:fixed;top:0;left:0;
+  width:100%;height:100vh;height:100dvh;
   background:var(--void);
   display:flex;justify-content:center;align-items:center;
   font-family:var(--sans);
