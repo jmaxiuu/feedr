@@ -141,6 +141,24 @@ It shows on **pick 1 only**. Repeating it on every reroll would turn an idea int
 The marquee carries the same thought more quietly ("the first bite is the hardest", "stop
 looking for better").
 
+### The come-back check-in
+
+Tap "Open in YouTube" and the video opens in a new tab. Return to Feedr and a small prompt
+appears above the ticket — "so, how was the chef's choice?" — with **liked it** / **not for
+me**.
+
+It's driven by the Page Visibility API, not the click itself: clicking only *arms* it with
+the video that was opened; it's `visibilitychange` firing with the tab visible again that
+actually reveals the prompt. That's deliberate — a click means the tab is about to lose
+focus, not that anyone watched anything, so showing it on click would ask before there's
+anything to answer. It only ever appears after an actual round trip to YouTube, and it clears
+itself (reroll, back, start over, a new pick) so it never shows for the wrong video.
+
+The reaction is logged to `localStorage` under `feedr.feedback` — id, title, channel, mood,
+runtime, liked, timestamp — capped at the last 500. Nothing reads that log yet; the picker in
+[`js/picker.js`](js/picker.js) doesn't use it. It's there to log honestly, not to promise a
+smarter kitchen it doesn't yet have.
+
 Order numbers persist in `localStorage`, so the ticket keeps counting across relaunches instead
 of resetting to #001 every time you open the app.
 
@@ -187,7 +205,7 @@ still needs a connection, obviously).
 
 ## Shipping an update
 
-Edit files, then bump `CACHE` in [`sw.js`](sw.js) (`feedr-counter-v3` → `-v4`) and deploy. The old
+Edit files, then bump `CACHE` in [`sw.js`](sw.js) (`feedr-counter-v4` → `-v5`) and deploy. The old
 cache is dropped on next launch. Catalog edits alone don't need a bump — `catalog.json` is fetched
 network-first. If you add a new file to the app shell, add it to `SHELL` in `sw.js` too, or it
 won't be there offline.

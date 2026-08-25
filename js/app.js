@@ -4,6 +4,8 @@ import { OVERRUN, pickFrom, hasMore, fitText } from "./picker.js";
 const MAX_PICKS = 3;          // 1 pick + 2 rerolls, then you choose from the 3
 const PLATING_MS = 850;       // how long the "On it." beat lasts
 const ORDER_KEY = "feedr.orderNo";
+const FEEDBACK_KEY = "feedr.feedback";
+const FEEDBACK_ACK_MS = 1400; // how long "glad it landed." sits before the check-in folds away
 
 const $ = id => document.getElementById(id);
 const SCREENS = ["s0","s1","s2","s3","s4","s5","s6"];
@@ -12,6 +14,7 @@ let CATALOG = [];
 let LENGTHS = [], MOODS = [];
 let mealLen, mood, round = [], current = "s0", plating = false;
 let orderNo = Number(localStorage.getItem(ORDER_KEY)) || 0;   // survives a relaunch
+let feedbackVideo = null;     // the video just sent to YouTube, waiting on a reaction
 
 /* ---------- screens ---------- */
 
@@ -25,7 +28,7 @@ function goto(id, step){
 $("backBtn").onclick = () => {
   if(current === "s2") goto("s1", "1/2");
   else if(current === "s1") goto("s0");
-  else if(current === "s4") goto("s2", "2/2");
+  else if(current === "s4"){ resetFeedback(); goto("s2", "2/2"); }
 };
 
 /* ---------- the menu, rendered from the catalog ---------- */
@@ -53,6 +56,44 @@ const pick = () => pickFrom(CATALOG, mood, mealLen, round);
 
 const watchUrl = v => "https://www.youtube.com/watch?v=" + v.id;
 
+/* ---------- the come-back check-in ----------
+   Fires from visibilitychange, not the anchor's click — a click only means the tab is
+   about to lose focus, not that anyone watched anything. Arming on click and revealing on
+   return means it only ever appears after an actual trip to YouTube and back. */
+
+function armFeedback(v){ feedbackVideo = v; }
+
+function resetFeedback(){
+  feedbackVideo = null;
+  $("feedback").classList.add("hidden");
+  $("feedbackBtns").classList.remove("hidden");
+  $("feedbackQ").textContent = "so, how was the chef's choice?";
+}
+
+function recordFeedback(liked){
+  if(!feedbackVideo) return;
+  const v = feedbackVideo;
+  const log = JSON.parse(localStorage.getItem(FEEDBACK_KEY) || "[]");
+  log.push({ id: v.id, title: v.title, channel: v.channel, mood, min: v.min,
+             liked, at: new Date().toISOString() });
+  while(log.length > 500) log.shift();      // keep it tidy — this isn't a database
+  localStorage.setItem(FEEDBACK_KEY, JSON.stringify(log));
+
+  feedbackVideo = null;                      // stop a stray visibilitychange re-arming it
+  $("feedbackBtns").classList.add("hidden");
+  $("feedbackQ").textContent = liked ? "glad it landed." : "noted, moving on.";
+  setTimeout(resetFeedback, FEEDBACK_ACK_MS);
+}
+
+$("fbLike").onclick = () => recordFeedback(true);
+$("fbDislike").onclick = () => recordFeedback(false);
+
+document.addEventListener("visibilitychange", () => {
+  if(document.visibilityState === "visible" && feedbackVideo && current === "s4"){
+    $("feedback").classList.remove("hidden");
+  }
+});
+
 /* ---------- serving ---------- */
 
 function serve(){
@@ -66,6 +107,7 @@ function serve(){
   // duplicate.
   round.push(v);
   plating = true;
+  resetFeedback();                             // a new plate makes any pending check-in stale
   goto("s3");
   setTimeout(() => {
     plating = false;
@@ -78,6 +120,7 @@ function serve(){
     $("tMeta").textContent = v.channel + " · " + v.min + " MIN";
     $("tFit").textContent = "→ " + fitText(v, mealLen);
     $("openBtn").href = watchUrl(v);            // a real anchor: survives standalone PWAs
+    $("openBtn").onclick = () => armFeedback(v);
 
     // say it once, on the first plate, where "maybe the next one's better" starts
     $("biteNote").classList.toggle("hidden", round.length !== 1);
@@ -95,6 +138,7 @@ function serve(){
 }
 
 function lastCall(){
+  resetFeedback();                             // the ticket area is about to show the chooser instead
   // a thin mood can run out of fresh channels before three, so don't promise three
   $("lcSub").textContent = round.length === MAX_PICKS
     ? "that's your three. pick one & eat"
@@ -118,7 +162,7 @@ function lastCall(){
 }
 
 $("startBtn").onclick = () => goto("s1", "1/2");
-$("overBtn").onclick = () => { round = []; goto("s0"); };
+$("overBtn").onclick = () => { round = []; resetFeedback(); goto("s0"); };
 $("retryBtn").onclick = start;
 
 /* ---------- boot ---------- */
