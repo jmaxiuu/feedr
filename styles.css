@@ -216,7 +216,13 @@ body{
 /* ---------- marquee ---------- */
 .marquee{
   border-top:1px solid var(--line);
-  padding:12px 0 calc(12px + var(--safe-b));
+  /* Not padding for --safe-b here on purpose: on the iOS standalone install this app
+     actually ships to, the WKWebView's own reachable area already stops short of the
+     true screen bottom (see the html/body background note above) — by more than the
+     home-indicator inset itself. So that reserved strip already sits below anything
+     this box can render, and stacking our own safe-area padding on top of it just reads
+     as dead space between the marquee and the edge, not as extra safety. */
+  padding:12px 0 12px;
   overflow:hidden;white-space:nowrap;
   font-family:var(--mono);font-size:10px;letter-spacing:.18em;color:var(--ink-dim);text-transform:uppercase;
   flex-shrink:0;
