@@ -202,3 +202,30 @@ start();
 if("serviceWorker" in navigator){
   addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(console.warn));
 }
+
+/* ---------- iOS standalone viewport nudge ----------
+   On a cold home-screen launch, WKWebView sometimes freezes window.innerHeight a fixed
+   amount short of screen.height — a long-documented WebKit quirk, and one no CSS or
+   manifest change can fix: innerHeight is an input the browser hands the page, not an
+   output of layout. The only thing that reliably makes WebKit re-measure its own frame
+   is a real scroll, so this forces one, once, right after load, then puts everything
+   back exactly as it was. */
+if(window.navigator.standalone){
+  addEventListener("load", () => {
+    const html = document.documentElement, body = document.body;
+    const prev = { ho: html.style.overflow, bo: body.style.overflow, pb: body.style.paddingBottom };
+    html.style.overflow = "auto";
+    body.style.overflow = "auto";
+    body.style.paddingBottom = "1px";
+    requestAnimationFrame(() => {
+      scrollTo(0, 1);
+      requestAnimationFrame(() => {
+        scrollTo(0, 0);
+        html.style.overflow = prev.ho;
+        body.style.overflow = prev.bo;
+        body.style.paddingBottom = prev.pb;
+        dispatchEvent(new Event("resize"));   // let the diagnostic (if present) re-read the numbers
+      });
+    });
+  });
+}
