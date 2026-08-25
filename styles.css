@@ -70,14 +70,15 @@
 html,body{height:100%;overflow:hidden;overscroll-behavior:none}
 html{background:var(--void)}
 body{
-  /* height matches .phone's own chain exactly (see .phone) so the two can't diverge and
-     leave --void showing through as a bar. -webkit-fill-available is the part that matters
-     on an iOS home-screen install specifically: standalone WKWebView doesn't reliably
-     resolve 100vh/100dvh to the true visible height the way Safari's own tab does — this
-     is WebKit's own answer for "the actual available height", so it wins there. Everywhere
-     else it's an invalid value and gets ignored, leaving the dvh/vh chain in charge. */
-  position:fixed;top:0;left:0;
-  width:100%;height:100vh;height:100dvh;height:-webkit-fill-available;
+  /* NOT position:fixed. That was tried here and measured, on a real iOS home-screen
+     install, to cost 59px off the bottom of the app's own viewport — window.innerHeight
+     came back short of screen.height by exactly the device's top safe-area inset, only
+     once body was pinned fixed. Safari's own tab (which has a collapsing toolbar to
+     accommodate) is the context that historically needs position:fixed to fully stop
+     rubber-band; a standalone install has no toolbar to collapse in the first place.
+     overflow:hidden + overscroll-behavior:none on html,body, with nothing here that can
+     ever overflow its own box, is what's actually doing the anti-bounce work. */
+  min-height:100vh;min-height:100dvh;min-height:-webkit-fill-available;
   background:var(--void);
   display:flex;justify-content:center;align-items:center;
   font-family:var(--sans);

@@ -4,7 +4,7 @@
   "description": "Sit down. The kitchen picks, you eat.",
   "start_url": ".",
   "scope": ".",
-  "display": "fullscreen",
+  "display": "standalone",
   "orientation": "portrait",
   "background_color": "#060906",
   "theme_color": "#0d120e",
